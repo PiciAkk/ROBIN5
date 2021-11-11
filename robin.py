@@ -3,6 +3,10 @@ import sys
 import pip
 import requests
 import os
+import playsound
+from gtts import gTTS
+import speech_recognition as sr
+from sys import stdin, stdout
 
 class csomagkezelo:
     def fuggosegTelepites(self, fuggosegek):
@@ -40,14 +44,30 @@ class csomagkezelo:
             raise Exception("Túl sok paraméter")
 class ROBIN:
     def hangFelismeres(self):
-        return "Szia"
-    def csomagBetoltes(self):
+        r = sr.Recognizer()
+        with sr.Microphone() as source:
+            os.system("clear")
+            stdout.write("\nMondj valamit: ")
+            audio = r.listen(source)
+            try:
+                parancs = r.recognize_google(audio, language="hu-HU")
+                print(parancs)
+                return parancs
+            except:
+                raise Exception("Nem sikerült a felismerés!")
+    def beszed(self, szoveg):
+        print(szoveg)
+        tts = gTTS(szoveg, lang="hu")
+        tts.save("beszed.mp3")
+        playsound.playsound("beszed.mp3")
+        os.remove("beszed.mp3")
+    def csomagokBetoltese(self):
         modulok = os.listdir("./csomagok")
         for modul in modulok:
             exec(open(f"csomagok/{modul}", "r").read())
     def __init__(self):
         self.parancs = self.hangFelismeres()
-        self.csomagBetoltes()
+        self.csomagokBetoltese()
 
 def main():
     csomagok = csomagkezelo()
