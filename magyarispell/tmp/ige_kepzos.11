@@ -1,0 +1,81 @@
+jön	jövés	jövõ	jött	jövendõ	jöhet
+létrejön	létrejövés	létrejövõ	létrejött	létrejövendõ	létrejöhet
+megy	menés	menõ	ment		mehet
+tönkremegy	tönkremenés	tönkremenõ	tönkrement		tönkremehet
+létrejön	létrejövés	létrejövõ	létrejött		létrejöhet
+hisz	hívés	hívõ	hitt	hiendõ		hihet	hihetõ	hihetõség	hihetetlen	hihetetlenség
+tesz	tevés	tevõ	tett	teendõ		tehet	tehetõ	tehetõség	tehetetlen	tehetetlenség
+jóvátesz	jóvátevés	jóvátevõ	jóvátett	jóváteendõ		jóvátehet	jóvátehetõ	jóvátehetõség	jóvátehetetlen	jóvátehetetlenség
+közzétesz	közzétevés	közzétevõ	közzétett	közzéteendõ		közzétehet	közzétehetõ	közzétehetõség	közzétehetetlen	közzétehetetlenség
+tönkretesz	tönkretevés	tönkretevõ	tönkretett	tönkreteendõ		tönkretehet	tönkretehetõ	tönkretehetõség	tönkretehetetlen	tönkretehetetlenség
+vesz	vevés	vevõ	vett	veendõ		vehet	vehetõ	vehetõség	vehetetlen	vehetetlenség
+észrevesz	észrevevés	észrevevõ	észrevett	észreveendõ		észrevehet	észrevehetõ	észrevehetõség	észrevehetetlen	észrevehetetlenség
+visz	vivés	vivõ	vitt			vihet	vihetõ	vihetõség	vihetetlen	vihetetlenség
+eszik	evés	evõ	evett			ehet	ehetõ	ehetõség	ehetetlen	ehetetlenség
+iszik	ivás	ivó	ivott			ihat	iható	ihatóság	ihatatlan	ihatatlanság
+lát	látás	látó	látott	látandó		láthat	látható	láthatóság	láthatatlan	láthatatlanság
+lót-fut	lótás-futás	lótó-futó	lótott-futott			lóthat-futhat
+viszontlát	viszontlátás	viszontlátó	viszontlátott	viszontlátandó		viszontláthat	viszontlátható	viszontláthatóság
+van	levés	levõ		leendõ	lehet		lehetõ	lehetõség	lehetetlen	lehetetlenség
+van	levés	lévõ
+telik	telés	telõ	telt		telhet		telhetõ	telhetõség	telhetetlen	telhetetlenség
+fürdik	fürdés	fürdõ	fürdött		fürödhet	fürödhetõ
+metsz	metszés	metszõ	metszett	metszendõ		metszhet	metszhetõ	metszhetõség	metszhetetlen	metszhetetlenség
+játszik	játszás	játszó	játszott	játszandó		játszhat	játszható	játszhatóság	játszhatatlan	játszhatatlanság
+látszik	látszás	látszó	látszott	látszandó	látszhat
+tetszik	tetszés	tetszõ	tetszett	tetszendõ	tetszhet
+hallatszik	hallatszás	hallatszó	hallatszott	hallatszhat
+alszik	alvás	alvó				alhat
+fekszik	fekvés	fekvõ			fekhet
+alszik						aludhat
+fekszik					feküdhet
+cselekszik	cselekvés	cselekvõ
+dicsekszik	dicsekvés	dicsekvõ
+haragszik	haragvás	haragvó
+növekszik	növekvés	növekvõ
+nyugszik	nyugvás	nyugvó			nyughat
+furakszik	furakvás	furakvó
+gyarapszik	gyarapvás	gyarapvó
+tolakszik	tolakvás	tolakvó
+tülekszik	tülekvés	tülekvõ
+törekszik	törekvés	törekvõ
+igyekszik	igyekvés	igyekvõ
+gyanakszik	gyanakvás	gyanakvó
+esküszik	esküvés	esküvõ
+alkuszik	alkuvás	alkuvó
+nyomakszik	nyomakvás	nyomakvó
+marakszik	marakvás	marakvó
+tanakszik	tanakvás	tanakvó
+kötekszik	kötekvés	kötekvõ
+edz	edzés	edzõ	edzett	edzendõ		edzhet	edzhetõ	edzhetõség	edzetlen	edzetlenség
+pedz	pedzés	pedzõ	pedzett	pedzendõ		pedzhet	pedzhetõ	pedzhetõség	pedzetlen	pedzetlenség
+lõ	lövés	lövõ	lõtt	lövendõ		lõhet	lõhetõ	lõhetõség	lövetlen	lövetlenség
+szõ	szövés	szövõ	szõtt	szövendõ		szõhet	szõhetõ	szõhetõség	szövetlen	szövetlenség
+ró	rovás	rovó	rótt			róhat	róható	róhatóság
+rí	rívás	rívó	rítt			ríhat
+nyû	nyüvés	nyüvõ	nyûtt	nyüvendõ		nyûhet	nyûhetõ	nyûhetõség	nyüvetlen	nyüvetlenség
+fõ	fövés	fövõ	fõtt	fövendõ		fõhet	fõhetõ	fõhetõség	fövetlen	fövetlenség
+nõ	növés	növõ	nõtt	növendõ		nõhet	nõhetõ	nõhetõség	növetlen	növetlenség
+rak	rakás	rakó	rakott	rakandó		rakhat	rakható	rakhatóság	rakhatatlan	rakhatatlanság
+csuk	csukás	csukó	csukott	csukandó		csukhat	csukható	csukhatóság	csukhatatlan	csukhatatlanság
+bök	bökés	bökõ	bökött	bökendõ		bökhet	bökhetõ	bökhetõség	böketlen	böketlenség
+bök	bökés	bökõs
+lök	lökés	lökõ	lökött	lökendõ		lökhet	lökhetõ	lökhetõség	löketlen	löketlenség
+lök	lökés	lökõs
+pök	pökés	pökõ	pökött	pökendõ		pökhet	pökhetõ	pökhetõség	pöketlen	pöketlenség
+ugrik	ugrás	ugró	ugrott	ugrandó		ugorhat	ugorható	ugorhatóság	ugorhatatlan	ugorhatatlanság
+kevesell	keveslés	keveslõ		keveslendõ
+kétell	kétlés	kétlõ	kétlendõ
+kicsinyell	kicsinylés	kicsinylõ	kicsinylendõ
+kicsinyel	kicsinylés	kicsinylõ	kicsinylendõ
+hall	hallás	halló	hallott			hallhat	hallható	hallhatóság	hallhatatlan	hallhatatlanság
+nagyotthall	nagyothallás	nagyothalló				nagyothallhat
+illik	illés	illõ	illett	illendõ
+pisil	pisilás	pisiló	pisilt			pisilhat	pisilható	pisilhatóság	pisilhatatlan	pisilhatatlanság
+pisil	pisilás	pisilós
+lélegez	légzés	légzõ	légzett	légzendõ
+belélegez	belégzés	belégzõ	belégzett	belégzendõ
+kilélegez	kilégzés	kilégzõ	kilégzett	kilégzendõ
+vet	vetés	vetõ	vetett	vetendõ		vethet	vethetõ	vethetõség	vethetetlen	vethetetlenség
+lovagol	lovaglás	lovagló
+lovagol	lovaglás	lovaglós

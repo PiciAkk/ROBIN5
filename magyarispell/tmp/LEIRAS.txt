@@ -1,0 +1,131 @@
+Név: alap
+Leírás: Az alapszókincset tartalmazó modul
+Felelõs: Németh László <nemeth@openoffice.org>
+Szavak száma: ~30000
+Új szókincs kialakításánál javasolt a
+fonev
+melleknev
+ige_alanyi
+ige_targy
+ragozatlan
+állományok kialakításával kezdeni. A következõ fontosabb
+leíró állományok a _mely, és a -ae/-jaje/-jajeae
+állományok.
+LEIRAS ÁLLOMÁNYOK
+fonev	köznevek
+fonev_ae	b, d, f, k, l, n, p, r és t végû; -a, -e birtokos személyragot kapó fõnevek (váll->válla)
+fonev_ing	mély és magas hangrendû ragot kapó fõnevek (fotel->fotelban, fotelben)
+fonev_jaje	c, g, h, j, m, s, x, y, v, és z végû, -ja, -je birtokos személyragot kapó fõnevek (hang->hangja)
+fonev_jajeae	-a/-e, és -ja/-je birtokos személyraggal is elõforduló fõnevek (beszéd->beszéde, beszédje)
+fonev_kulon	fõnevek, amelyek összetett szóban nem szerepelhetnek (kicsi)
+fonev_magas	fõnevek, amelyek utolsó szótagja mély hangrendû, de magas hangrendû ragot kapnak (gentleman->gentlemannel)
+fonev_magas2	fõnevek, amelyek ajakkerekítéses magas hangrendû ragot kapnak (Weöreshöz)
+fonev_mely	fõnevek, amelyek utolsó szótagja magas hangrendû, de mély hangrendû ragot kapnak (héj->héjjal)
+fonev_morfo1	hangkivetõ fõnevek, többesszámú alakjaikkal (szerelem->szerelmen, kehely->kelyhen)
+fonev_morfo2	nyitótövek, és egyéb kivételek, többesszámú alakjaikkal
+fonev_oe	-et, -ek, -ön, -höz ragot kapó, ajakkerekítéses magas hangrendû fõnevek (könyvet, könyvön)
+fonev_osszetett	összetett szavak (kerékpár)
+fonev_vege	összetett szavak végén szerepelhet csak
+ige_alanyi	nem tárgyas igék (történik, nincs történi, történed)
+ige_ikes_kiv	dupla mássalhangzó+ikes igék, -ó, -ás képzõkkel, l. iges.awk, igesgen
+ige_koto	igekötõt nem kapó igék (vagy külön kezelve az igekötõs alakok)
+ige_mely	igék, amelyek utolsó szótagja magas hangrendû, de mély hangrendû ragot kapnak (sír->sírok)
+ige_morfo	hangkivetõs igék (bicsakol->bicsakló)
+ige_targy	tárgyas igék (üt->üti, ütöm)
+ige_tat_kiv	-tat, -tet gyakorítóképzõs alakok nincsenek (pl. mond, mondat, de nincs mondtat, mondattat)
+melleknev	melléknevek
+melleknev_a	-o kötõhangzót (fõnévi ragozást) nem kap, (nincs állottot)
+melleknev_ae	b, d, f, k, l, n, p, r és t végû; -a, -e birtokos személyragot kapó melléknevek
+melleknev_e	csak ajakréses magas hangrendû toldalékok, kivéve -hez. -ön és -höz ragot is kap. (zöldet, zöldön, zöldök nincs)
+melleknev_ing	mély és magas hangrendû ragot kapó melléknevek
+melleknev_jaje	c, g, h, j, m, s, x, y, v, és z végû, -ja, -je birtokos személyragot kapó melléknevek
+melleknev_jajeae	-a/-e, és -ja/-je birtokos személyraggal is elõforduló melléknevek
+melleknev_mely	melléknevek, amelyek utolsó szótagja magas hangrendû, de mély hangrendû ragot kapnak
+melleknev_oe	ajakkerekítéses és ajakréses magas hangrendû melléknevek, kivéve -hez toldalék
+ragozatlan	nem ragozott, vagy kivételek (kapcsolókkal megadva a ragokat)
+tulajdonnev	tulajdonnevek: ha az elsõ mezõ üres, akkor a szó ragozatlan, ha nem, akkor a második mezõ melléknév
+tulajdonnev.geo	földrajzi nevek
+tulajdonnev.keresztnev	keresztnevek
+tulajdonnev.szemelynev	személynevek
+kotojeles_mely	mély ragozású, idegen ejtésû, vagy mozaikszavak kötõjellel elválasztott toldalékkal
+kotojeles_magas	magas ajakréses ragozású, idegen ejtésû, vagy mozaikszavak kötõjellel elválasztott toldalékkal
+kotojeles_magas2	magas ajakkerekítéses ragozású, idegen ejtésû, vagy mozaikszavak kötõjellel elválasztott toldalékkal
+kotojeles_hangzo	ezeknél nincs kötõhangzó a toldalék és a szó között, hamarosan megvalósítva
+A tulajdonnevek hangrendjérõl: a -i végû melléknévképzõs alakoknál a hangrend automatikusan
+mély, ha a tõszó utolsó magánhangzója mély. Ha ingadozó, (i, í, mint Párizs), akkor
+külön felveendõ a melleknev_mely allomanyba a képzett alak (párizsi).
+Név: autizmus
+Leírás: Autizmussal kapcsolatos szakkifejezések
+Felelõs: Kapitány Zoltán, Szív és Kéz Alapítvány, Kaposvár
+Szavak száma: ~15
+Név: biológia
+Leírás: Mintegy félezer hazai edényes növény, ill. -nemzetség nevét tartalmazza
+Felelõs: Németh László <nemethl@gyorsposta.hu>
+Szavak száma: ~550
+Név: földrajz
+Leírás: földrajzi szakszókincs
+Felelõs: Bíró Árpád <biro_arpad@yahoo.com>
+Szavak száma: ~200
+Név: Godó
+Leírás: Godó Ferenc részben feldolgozott szógyûjtése
+Felelõs: Németh László <nemethl@gyorsposta.hu>
+Szavak száma: ~7000
+Név: Godó II.
+Leírás: Godó Ferenc feldolgozatlan szógyûjtése
+Felelõs: Németh László <nemethl@gyorsposta.hu>
+Szavak száma: ~9400
+Név: Huhyph
+Leírás: Mayer Gyula Huhyph.tex 4.0 szókincsének Bíró Árpád által feldolgozott része
+Felelõs: Németh László <nemethl@gyorsposta.hu>
+Szavak száma: ~700
+Név: idegen
+Leírás: idegen szavak (+ a fõnevek nem szerepelnek összetett szavakban)
+Felelõs: Németh László <nemethl@gyorsposta.hu>
+Szavak száma: ~100
+Név: ifjusagi
+Leírás: ifjúsági nyelv
+Felelõs: Németh László <nemethl@gyorsposta.hu>
+Szavak száma: ~20
+Név: informatika
+Leírás: Számítástechnikai szakszókincs
+Felelõs: Németh László <nemethl@gyorsposta.hu>
+Szavak száma: ~300
+Név: javítómodul
+Leírás: Mesterséges korlátozások a jobb hibajavítás érdekében
+Felelõs: Németh László <nemethl@gyorsposta.hu>
+Szavak száma: ~50
+Név: kémia
+Leírás: Kémiai szakszókincs
+Felelõs: Németh László
+Szavak száma: ~500
+Név: magyar_helységnevek
+Leírás: Magyar helységnevek a KSH adatok alapján
+Forrás: A Magyar Köztársaság helységnévkönyve, 2007. jan. 1., http://www.ksh.hu
+Felelõs: Németh László 
+Szavak száma: ~3600
+Név: magyar személynevek
+Leírás: Mai és történelmi magyar személynevek, ld. még OLVASSEL
+Felelõs: Goldman Eleonóra (eleonora46@gmx.net)
+Szavak száma: ~6000
+Megjegyzés: a hosszú õ-k helyén rövid o szerepel több esetben
+Megjegyzés: y végûeknél az a kötõhangzós toldalék hiányzik (pl. Závodszkyak)
+Név: régies
+Leírás: a mai köznyelvben elvétve, vagy nem használt szavak
+Felelõs: Németh László <nemethl@gyorsposta.hu>
+Szavak száma: ~10
+Név: sport
+Leírás: Jelenleg a gól stilisztikai változatait tartalmazza, 40 ó-ig bezárólag
+Felelõs: Németh László <nemethl@gyorsposta.hu>
+Szavak száma: ~39
+Név: Szószablya
+Leírás: A Szószablya projekthez kapcsolódó szavak
+Felelõs: Halácsy Péter <halacsy@mokk.bme.hu>
+Szavak száma: ~700
+Név: tamogatok
+Leírás: Fejlesztõk, együttmûködõk, támogatók névsora
+Felelõs: Németh László <nemethl@gyorsposta.hu>
+Szavak száma: ~20
+Név: zene
+Leírás: pár zenei szakszó
+Felelõs: Németh László <nemethl@gyorsposta.hu>
+Szavak száma: ~4
