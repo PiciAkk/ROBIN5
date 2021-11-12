@@ -13,12 +13,6 @@ from scipy.io.wavfile import write
 from sys import stdin, stdout
 
 class csomagkezelo:
-    def importTelepites(self, importok, csomagnev):
-        importokFajl = open(f"importok/{csomagnev}.txt", "w+")
-        for i in importok:
-            importokFajl.write(i + "\n")
-    def importTorles(self, csomagnev):
-        os.remove(f"importok/{csomagnev}.txt")
     def fuggosegTelepites(self, fuggosegek):
         for csomagnev in fuggosegek:
             if hasattr(pip, 'main'):
@@ -36,10 +30,9 @@ class csomagkezelo:
         modulFajl = open(f"csomagok/{csomagnev}.py", "w+")
         modulFajl.write(requests.get(f"{baseURL}/modul.py").text)
         modulFajl.close()
-        importok = (requests.get(f"{baseURL}/importok.txt").text).split()
+        importok = (requests.get(f"{baseURL}/importok.py").text)
         fuggosegek = (requests.get(f"{baseURL}/fuggosegek.txt").text).split()
         self.fuggosegTelepites(fuggosegek)
-        self.importTelepites(importok, csomagnev)
         print("Csomag sikeresen telepítve")
     def torles(self, csomagnev):
         baseURL = f"https://raw.githubusercontent.com/PiciAkk/ROBIN5-Csomagok/main/{csomagnev}"
@@ -48,7 +41,6 @@ class csomagkezelo:
             os.remove(f"csomagok/{csomagnev}.py")
         except:
             raise Exception("Csomag nincs telepítve!")
-        self.importTorles(csomagnev)
         fuggosegekTorleseIs = input("Le szeretnéd törölni a csomag függőségeit is? (Y/n) ").lower()
         if fuggosegekTorleseIs == "y":
             self.fuggosegTorles(fuggosegek)
@@ -98,24 +90,12 @@ class ROBIN:
         modulok = os.listdir("./csomagok")
         for modul in modulok:
             exec(open(f"csomagok/{modul}", "r").read())
-    def importokBetoltese(self):
-        importFajlok = os.listdir("./importok")
-        for importFajl in importFajlok:
-            importokListaja = open(f"importok/{importFajl}", "r").read().split()
-            for i in importokListaja:
-                if i != "":
-                    print(i)
-                    try:
-                        __import__(i)
-                    except ImportError:
-                        raise Exception(f"A modul {i} nem található!")
     def __init__(self):
         self.parancs = self.hangFelismeres()
         os.remove("hang.wav") # töröljük a (már elemzett) hangot
-        self.importokBetoltese()
         self.csomagokBetoltese()
-        # idáig csak akkor megy el a program, ha semelyik modul sem lépteti ki a programot
-        self.beszed("Parancs nem található!")
+        # idáig csak akkor megy el a program, ha semelyik modul sem lépteti ki
+        self.beszed("A parancs nem található!")
 
 def main():
     csomagok = csomagkezelo()
