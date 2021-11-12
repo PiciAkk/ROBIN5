@@ -1,4 +1,6 @@
 gTTS
 playsound
 SpeechRecognition
-pyaudio
+scipy
+sounddevice
+soundfile

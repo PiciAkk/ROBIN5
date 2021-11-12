@@ -7,11 +7,14 @@ import json
 import playsound
 from gtts import gTTS
 import speech_recognition as sr
+import sounddevice as sd
+import soundfile
+from scipy.io.wavfile import write
 from sys import stdin, stdout
 
 class csomagkezelo:
     def importTelepites(self, importok, csomagnev):
-        importokFajl = open(f"importok/{csomagnev}.txt", "w")
+        importokFajl = open(f"importok/{csomagnev}.txt", "w+")
         for i in importok:
             importokFajl.write(i + "\n")
     def importTorles(self, csomagnev):
@@ -45,6 +48,7 @@ class csomagkezelo:
             os.remove(f"csomagok/{csomagnev}.py")
         except:
             raise Exception("Csomag nincs telepítve!")
+        self.importTorles(csomagnev)
         fuggosegekTorleseIs = input("Le szeretnéd törölni a csomag függőségeit is? (Y/n) ").lower()
         if fuggosegekTorleseIs == "y":
             self.fuggosegTorles(fuggosegek)
@@ -53,8 +57,6 @@ class csomagkezelo:
         else:
             raise Exception(f"A válasz {fuggosegekTorleseIs} nem megfelelő")
         print("Csomag sikeresen törölve!")
-        importok = (requests.get(f"{baseURL}/importok.txt").text).split()
-        self.importTorles(importok)
     def parameterTeszt(self, args):
         if len(args) < 3:
             raise Exception("Csomagnév nincs specifikálva!")
@@ -62,13 +64,26 @@ class csomagkezelo:
             raise Exception("Túl sok paraméter")
 class ROBIN:
     def hangFelismeres(self):
+        os.system("clear")
+
+        # vegyük fel a hangot
+        frekvencia = 44100
+        hossz = 5
+        felvetel = sd.rec(int(hossz * frekvencia), samplerate=frekvencia, channels=2)
+        stdout.write("\nMondj valamit: ")
+        sd.wait()  # várjuk a hangot
+        write("hang.wav", frekvencia, felvetel)  # elmentjük a hangot
+
+        # konvertáljuk a hangot PCM_16-ra
+        adat, samplerate = soundfile.read("hang.wav")
+        soundfile.write("hang.wav", adat, samplerate, subtype='PCM_16')
+
+        # ismerjük fel a hang beszédét
         r = sr.Recognizer()
-        with sr.Microphone() as source:
-            os.system("clear")
-            stdout.write("\nMondj valamit: ")
-            audio = r.listen(source)
+        with sr.AudioFile("hang.wav") as forras:
+            hang = r.record(forras)
             try:
-                parancs = r.recognize_google(audio, language="hu-HU")
+                parancs = r.recognize_google(hang, language="hu-HU")
                 print(parancs)
                 return parancs
             except:
@@ -96,6 +111,7 @@ class ROBIN:
                         raise Exception(f"A modul {i} nem található!")
     def __init__(self):
         self.parancs = self.hangFelismeres()
+        os.remove("hang.wav") # töröljük a (már elemzett) hangot
         self.importokBetoltese()
         self.csomagokBetoltese()
         # idáig csak akkor megy el a program, ha semelyik modul sem lépteti ki a programot
