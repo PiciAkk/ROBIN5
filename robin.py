@@ -10,15 +10,12 @@ import speech_recognition as sr
 from sys import stdin, stdout
 
 class csomagkezelo:
-    def importTelepites(self, importok):
-        importokFajl = open("csomagok/importok.txt", "a+")
+    def importTelepites(self, importok, csomagnev):
+        importokFajl = open(f"importok/{csomagnev}.txt", "w")
         for i in importok:
             importokFajl.write(i + "\n")
-    def importTorles(self, torlendoImportok):
-        mostaniImportok = open("csomagok/importok.txt", "r").read()
-        importokFajl = open("csomagok/importok.txt", "w+")
-        for i in torlendoImportok:
-            mostaniImportok.replace(i, "")
+    def importTorles(self, csomagnev):
+        os.remove(f"importok/{csomagnev}.txt")
     def fuggosegTelepites(self, fuggosegek):
         for csomagnev in fuggosegek:
             if hasattr(pip, 'main'):
@@ -39,7 +36,7 @@ class csomagkezelo:
         importok = (requests.get(f"{baseURL}/importok.txt").text).split()
         fuggosegek = (requests.get(f"{baseURL}/fuggosegek.txt").text).split()
         self.fuggosegTelepites(fuggosegek)
-        self.importTelepites(importok)
+        self.importTelepites(importok, csomagnev)
         print("Csomag sikeresen telepítve")
     def torles(self, csomagnev):
         baseURL = f"https://raw.githubusercontent.com/PiciAkk/ROBIN5-Csomagok/main/{csomagnev}"
@@ -82,19 +79,21 @@ class ROBIN:
         tts.save("beszed.mp3")
         playsound.playsound("beszed.mp3")
         os.remove("beszed.mp3")
-    def importokBetoltese(self):
-        importok = open("csomagok/importok.txt", "r").read().split("\n")
-        for i in importok:
-            if i != "":
-                print(i)
-                try:
-                    __import__(i)
-                except ImportError:
-                    raise Exception("Nem található a modul: " + i)
     def csomagokBetoltese(self):
         modulok = os.listdir("./csomagok")
         for modul in modulok:
             exec(open(f"csomagok/{modul}", "r").read())
+    def importokBetoltese(self):
+        importFajlok = os.listdir("./importok")
+        for importFajl in importFajlok:
+            importokListaja = open(f"importok/{importFajl}", "r").read().split()
+            for i in importokListaja:
+                if i != "":
+                    print(i)
+                    try:
+                        __import__(i)
+                    except ImportError:
+                        raise Exception(f"A modul {i} nem található!")
     def __init__(self):
         self.parancs = self.hangFelismeres()
         self.importokBetoltese()
