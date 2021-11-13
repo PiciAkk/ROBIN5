@@ -4,3 +4,4 @@ SpeechRecognition
 scipy
 sounddevice
 soundfile
+cyhunspell

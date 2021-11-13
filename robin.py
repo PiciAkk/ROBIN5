@@ -11,8 +11,13 @@ import sounddevice as sd
 import soundfile
 from scipy.io.wavfile import write
 from sys import stdin, stdout
+from hunspell import Hunspell
 
 class csomagkezelo:
+    def listazas(self):
+        modulok = os.listdir("csomagok")
+        for modul in modulok:
+            print(os.path.splitext(modul)[0])
     def fuggosegTelepites(self, fuggosegek):
         for csomagnev in fuggosegek:
             if hasattr(pip, 'main'):
@@ -55,14 +60,14 @@ class csomagkezelo:
         elif len(args) > 3:
             raise Exception("Túl sok paraméter")
 class ROBIN:
-    def hangFelismeres(self):
+    def hangFelismeres(self, prompt="\nMondj valamit: "):
         os.system("clear")
 
         # vegyük fel a hangot
         frekvencia = 44100
         hossz = 5
         felvetel = sd.rec(int(hossz * frekvencia), samplerate=frekvencia, channels=2)
-        stdout.write("\nMondj valamit: ")
+        stdout.write(prompt)
         sd.wait()  # várjuk a hangot
         write("hang.wav", frekvencia, felvetel)  # elmentjük a hangot
 
@@ -92,7 +97,8 @@ class ROBIN:
             exec(open(f"csomagok/{modul}", "r").read())
     def __init__(self):
         self.parancs = self.hangFelismeres()
-        os.remove("hang.wav") # töröljük a (már elemzett) hangot
+        self.h = Hunspell(f"hu_HU", hunspell_data_dir="magyarispell") # inicializáljuk a hunspell-t
+        os.remove("hang.wav") # töröljük a (már elemzett) hangfájlt
         self.csomagokBetoltese()
         # idáig csak akkor megy el a program, ha semelyik modul sem lépteti ki
         self.beszed("A parancs nem található!")
@@ -109,6 +115,10 @@ def main():
     elif args[1] == "torles":
         csomagok.parameterTeszt(args)
         csomagok.torles(args[2])
+    elif args[1] == "csomagok":
+        csomagok.listazas()
+    else:
+        raise Exception("Parancs nem található!")
 
 if __name__ == "__main__":
     main()
