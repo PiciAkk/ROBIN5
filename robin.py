@@ -59,14 +59,14 @@ class csomagkezelo:
         for csomagnev in fuggosegek:
             telepites = pip().telepites(csomagnev)
             if telepites.exitcode != 0:
-                print(telepites.stderr)
+                raise Exception(telepites.stderr)
             else:
                 print(f"Függőség ({csomagnev}) sikeresen telepítve")
     def fuggosegTorles(self, fuggosegek):
         for csomagnev in fuggosegek:
             eltavolitas = pip().eltavolitas(csomagnev)
             if eltavolitas.exitcode != 0:
-                print(eltavolitas.stderr)
+                raise Exception(eltavolitas.stderr)
             else:
                 print(f"Függőség ({csomagnev}) sikeresen eltávolítva!")
     def telepites(self, csomagnev):
