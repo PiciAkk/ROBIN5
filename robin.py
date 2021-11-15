@@ -1,35 +1,74 @@
 #!/usr/bin/python3
 import sys
 import pip
+import subprocess
 import requests
 import os
 import json
 import playsound
 from gtts import gTTS
 import speech_recognition as sr
+import time
 import sounddevice as sd
 import soundfile
 from scipy.io.wavfile import write
 from sys import stdin, stdout
 from hunspell import Hunspell
+from googletrans import Translator
 
+class pip:
+    def parancsFuttatas(self, parancs, csomag):
+        folyamat = subprocess.Popen([sys.executable, '-m', 'pip', parancs, csomag], stderr=subprocess.PIPE, stdout=subprocess.PIPE)
+        stdout, stderr = folyamat.communicate()
+        exit_code = folyamat.wait()
+        class returnableClass:
+            pass
+        returnable = returnableClass()
+        returnable.exitcode = int(exit_code)
+        returnable.stdout = stdout
+        returnable.stderr = stderr
+        return returnable
+    def telepites(self, csomag):
+        returnable = self.parancsFuttatas('install', csomag)
+        return returnable
+    def eltavolitas(self, csomag):
+        returnable = self.parancsFuttatas('uninstall', csomag)
+        return returnable
 class csomagkezelo:
+    def frissites(self):
+        modulok = os.listdir("csomagok")
+        frissitettCsomagok = 0
+        for modul in modulok:
+            csomagnev = os.path.splitext(modul)[0]
+            baseURL = f"https://raw.githubusercontent.com/PiciAkk/ROBIN5-Csomagok/main/{csomagnev}"
+            serverContent = requests.get(f"{baseURL}/modul.py").text
+            localContent = open(f"csomagok/{csomagnev}.py", "r").read()
+            if (serverContent != localContent):
+                print(f"{csomagnev} frissítésre szorul!")
+                self.telepites(csomagnev)
+                frissitettCsomagok += 1
+        if frissitettCsomagok == 0:
+            print("Egy csomag sem szorult frissítésre")
+        else:
+            print(f"-----\n{frissitettCsomagok} csomag sikeresen frissítve")
     def listazas(self):
         modulok = os.listdir("csomagok")
         for modul in modulok:
             print(os.path.splitext(modul)[0])
     def fuggosegTelepites(self, fuggosegek):
         for csomagnev in fuggosegek:
-            if hasattr(pip, 'main'):
-                pip.main(['install', csomagnev])
+            telepites = pip().telepites(csomagnev)
+            if telepites.exitcode != 0:
+                print(telepites.stderr)
             else:
-                pip._internal.main(['install', csomagnev])
+                print(f"Függőség ({csomagnev}) sikeresen telepítve")
     def fuggosegTorles(self, fuggosegek):
         for csomagnev in fuggosegek:
-            if hasattr(pip, 'main'):
-                pip.main(['uninstall', csomagnev])
+            eltavolitas = pip().eltavolitas(csomagnev)
+            if eltavolitas.exitcode != 0:
+                print(eltavolitas.stderr)
             else:
-                pip._internal.main(['uninstall', csomagnev])
+                print(f"Függőség ({csomagnev}) sikeresen eltávolítva!")
     def telepites(self, csomagnev):
         baseURL = f"https://raw.githubusercontent.com/PiciAkk/ROBIN5-Csomagok/main/{csomagnev}"
         modulFajl = open(f"csomagok/{csomagnev}.py", "w+")
@@ -117,6 +156,8 @@ def main():
         csomagok.torles(args[2])
     elif args[1] == "csomagok":
         csomagok.listazas()
+    elif args[1] == "frissites":
+        csomagok.frissites()
     else:
         raise Exception("Parancs nem található!")
 
