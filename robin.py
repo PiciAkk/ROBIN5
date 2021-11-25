@@ -35,26 +35,30 @@ class pip:
         returnable = self.parancsFuttatas('uninstall', csomag)
         return returnable
 class csomagkezelo:
-    def frissites(self):
-        modulok = os.listdir("csomagok")
+    def csomagokFrissitese(self, csomagok):
         frissitettCsomagok = 0
-        for modul in modulok:
-            csomagnev = os.path.splitext(modul)[0]
-            baseURL = f"https://raw.githubusercontent.com/PiciAkk/ROBIN5-Csomagok/main/{csomagnev}"
+        for csomag in csomagok:
+            baseURL = f"https://raw.githubusercontent.com/PiciAkk/ROBIN5-Csomagok/main/{csomag}"
             serverContent = requests.get(f"{baseURL}/modul.py").text
-            localContent = open(f"csomagok/{csomagnev}.py", "r").read()
+            try:
+                localContent = open(f"csomagok/{csomag}.py", "r").read()
+            except:
+                raise Exception(f"{csomag} nincs telepítve, így nem lehet frissíteni!")
             if (serverContent != localContent):
-                print(f"{csomagnev} frissítésre szorul!")
-                self.telepites(csomagnev)
+                print(f"{csomag} frissítésre szorul!")
+                self.telepites(csomag)
                 frissitettCsomagok += 1
         if frissitettCsomagok == 0:
             print("Egy csomag sem szorult frissítésre")
         else:
-            print(f"-----\n{frissitettCsomagok} csomag sikeresen frissítve")
+            print(f"-----\n{frissitettCsomagok} csomag sikeresen frissítve")  
+    def frissites(self):
+        self.csomagokFrissitese(list(self.listazas()))
+        # kilistázzuk a csomagokat, majd frissítjük azokat
     def listazas(self):
         modulok = os.listdir("csomagok")
         for modul in modulok:
-            print(os.path.splitext(modul)[0])
+            yield os.path.splitext(modul)[0]
     def fuggosegTelepites(self, fuggosegek):
         for csomagnev in fuggosegek:
             telepites = pip().telepites(csomagnev)
@@ -71,10 +75,12 @@ class csomagkezelo:
                 print(f"Függőség ({csomagnev}) sikeresen eltávolítva!")
     def telepites(self, csomagnev):
         baseURL = f"https://raw.githubusercontent.com/PiciAkk/ROBIN5-Csomagok/main/{csomagnev}"
+        serverContent = requests.get(f"{baseURL}/modul.py").text
+        if serverContent == "404: Not Found":
+            raise Exception(f"A csomag ({csomagnev}) nem található!")
         modulFajl = open(f"csomagok/{csomagnev}.py", "w+")
-        modulFajl.write(requests.get(f"{baseURL}/modul.py").text)
+        modulFajl.write(serverContent)
         modulFajl.close()
-        importok = (requests.get(f"{baseURL}/importok.py").text)
         fuggosegek = (requests.get(f"{baseURL}/fuggosegek.txt").text).split()
         self.fuggosegTelepites(fuggosegek)
         print("Csomag sikeresen telepítve")
@@ -84,7 +90,7 @@ class csomagkezelo:
         try:
             os.remove(f"csomagok/{csomagnev}.py")
         except:
-            raise Exception("Csomag nincs telepítve!")
+            raise Exception(f"A csomag ({csomagnev}) nincs telepítve!")
         fuggosegekTorleseIs = input("Le szeretnéd törölni a csomag függőségeit is? (Y/n) ").lower()
         if fuggosegekTorleseIs == "y":
             self.fuggosegTorles(fuggosegek)
@@ -93,14 +99,12 @@ class csomagkezelo:
         else:
             raise Exception(f"A válasz {fuggosegekTorleseIs} nem megfelelő")
         print("Csomag sikeresen törölve!")
-    def parameterTeszt(self, args):
-        if len(args) < 3:
-            raise Exception("Csomagnév nincs specifikálva!")
-        elif len(args) > 3:
-            raise Exception("Túl sok paraméter")
 class ROBIN:
-    def hangFelismeres(self, prompt="\nMondj valamit: "):
-        os.system("clear")
+    def hangFelismeres(self, prompt="Mondj valamit: "):
+        # rakjunk egy newline karaktert a prompt elejére
+        prompt = "\n" + prompt
+        # cleareljük a konzolt
+        print("\033[H\033[J", end="")
 
         # vegyük fel a hangot
         frekvencia = 44100
@@ -145,19 +149,29 @@ class ROBIN:
 def main():
     csomagok = csomagkezelo()
     args = sys.argv
+    def parameterTeszt(args):
+        if len(args) < 3:
+            raise Exception("Csomagnév nincs specifikálva!")
+        elif len(args) > 3:
+            raise Exception("Túl sok paraméter")
+                
     if len(args) == 1:
         ROBIN()
-        quit()
+        quit() # kilépünk, ha valahogy nem lépett még ki ROBIN
     elif args[1] == "telepites":
-        csomagok.parameterTeszt(args)
+        parameterTeszt(args)
         csomagok.telepites(args[2])
     elif args[1] == "torles":
-        csomagok.parameterTeszt(args)
+        parameterTeszt(args)
         csomagok.torles(args[2])
     elif args[1] == "csomagok":
-        csomagok.listazas()
+        print('\n'.join(list(csomagok.listazas())))
+        # kilistázzuk a csomagokat, külön sorokba tördeljük, majd kiíratjuk
     elif args[1] == "frissites":
-        csomagok.frissites()
+        if len(args) == 3:
+            csomagok.csomagokFrissitese([args[2]])
+        else:
+            csomagok.frissites()
     else:
         raise Exception("Parancs nem található!")
 
